@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron">
+        <h1 class="display-3">Welcome to GAGUNRK.COM!</h1>
+      </div>
+    </div>
+    <% news.forEach(function(item) { %>
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title"><%= item.title %></h4>
+          <p class="card-text"><%= item.description %></p>
+          <a href="<%= item.link %>" class="btn btn-primary">Read More</a>
+          <p class="card-text">Published on: <%= item.pubDate %></p>
+        </div>
+      </div>
+    <% }); %>
+  </body>
+</html>
