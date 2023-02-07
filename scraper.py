@@ -11,7 +11,7 @@ load_dotenv()
 
 mydb = mysql.connector.connect(
     host="localhost",
-    user="gomezpa",
+    user=os.getenv("user"),
     password=os.getenv("password")
 )
 
