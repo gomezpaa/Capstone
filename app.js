@@ -24,17 +24,6 @@ app.get('/about', function(req, res){
   res.render('about');
 });
 
-app.get('/login', function(req, res){
-  console.log("Login Page")
-  res.render('login');
-});
-
-app.get('/signup', function(req, res){
-  console.log("Sign Up Page")
-  res.render('signup');
-});
-
-
 app.listen(PORT, function(err){
   if (err) console.log(err);
   console.log("Website listening on port: ", PORT);

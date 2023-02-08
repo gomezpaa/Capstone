@@ -1,0 +1,141 @@
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12 20px;
+  margin: 8px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+.signup-input[type=text]:focus, [type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity: 1;
+}
+
+.signupcancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+.logincancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+.signupcancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+.signup-container{
+  padding: 16px;
+}
+
+.login-container {
+  padding: 16px;
+}
+
+span.passwd {
+  float: right;
+  padding-top: 16px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(71, 78, 93, 0.7);
+  padding-top: 50px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+.signup-close, .login-close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.signup-close:hover, 
+.signup-close:focus,
+.login-close:hover,
+.login-close:focus {
+  color: black;
+  cursor: pointer;
+}
+
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)}
+  to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+  from {transform: scale(0)}
+  to {transform: scale(1)}
+}
+
+@media screen and (max-width: 300px) {
+  .cancelbtn, .cancelbtn {
+    width: 100%;
+  }
+}
+  
+
+

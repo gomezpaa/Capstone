@@ -1,0 +1,27 @@
+<span onclick="document.getElementById('id02').style.display='none'" class="login-close animate" title="Close Menu">&times;</span>
+<form class="modal-content animate">
+  
+  <div class="imgcontainer">
+    <img src="/images/profile.png" alt="Avatar" class="avatar">    
+  </div>
+
+  <div class="login-container">
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+
+    <label for="passwd"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="passwd" required>
+
+    <button type="submit">Login</button>
+
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+
+  <div class="login-container" style="background-color:#f1f1f1">
+    <button type="button" onclick="document.getElementById('id02').style.display='none'" class="logincancelbtn">Cancel</button>
+    <span class="passwd">Forgot your password?</span>
+  </div>
+
+</form>
