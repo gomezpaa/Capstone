@@ -23,7 +23,9 @@ input[type=text], input[type=password] {
   outline: none;
 }
 
-button {
+.signupbtn, 
+.loginbtn, 
+.logincancelbtn {
   background-color: #04AA6D;
   color: white;
   padding: 14px 20px;
@@ -34,7 +36,8 @@ button {
   opacity: 0.9;
 }
 
-button:hover {
+.signupbtn:hover,
+.loginbtn:hover {
   opacity: 1;
 }
 

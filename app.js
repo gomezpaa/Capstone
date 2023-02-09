@@ -14,14 +14,19 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
   console.log("Home Page")
-  db.getData(function(data) {
-    res.render('home', {news:data});
-  });
+  res.render('home')
 });
 
 app.get('/about', function(req, res){
   console.log("About Page")
   res.render('about');
+});
+
+app.get('/nyt', function(req, res){
+  console.log("NYT")
+  db.getData(function(data){  
+    res.render('nyt', {news:data});
+  });
 });
 
 app.listen(PORT, function(err){
