@@ -3,6 +3,7 @@
     <title>Home</title>
     <link href="/css/styles.css" rel="stylesheet" type="text/css">
     <link href="/css/modal.css" rel="stylesheet" type="text/css">
+    <link href="/css/container.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
@@ -16,18 +17,18 @@
           <i class="fa fa-caret-down"></i>
         </button>
       
-        <div class="dropdown-content">
+        <div class="dropdown-content news-dropdown-content">
           <a href="/nyt">NYT</a>
           <a href="#">Fox News</a>
           <a href="#">CNN</a>
         </div>
       </div>
+      <a onclick="document.getElementById('id01').style.display='block'" class="signup-btn"><span>Sign Up</span></a>
+      <a onclick="document.getElementById('id02').style.display='block'" class="login-btn"><span>Login</span></a> 
     </div>
 
     
-    <a onclick="document.getElementById('id01').style.display='block'" class="signup-btn"><span>Sign Up</span></a>
-    <a onclick="document.getElementById('id02').style.display='block'" class="login-btn"><span>Login</span></a>
-    
+   
     <div id="id01" class="modal">
       <%- include("./partials/id01.ejs") %>
     </div>     
