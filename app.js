@@ -25,7 +25,9 @@ app.get('/about', function(req, res){
 app.get('/nyt', function(req, res){
   console.log("NYT")
   db.getData(function(data){  
-    res.render('nyt', {news:data});
+    db.getFullData(function(fullArticle){
+      res.render('nyt', {news:data, fullArticle: fullArticle});
+    });
   });
 });
 
