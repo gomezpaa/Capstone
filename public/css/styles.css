@@ -48,6 +48,7 @@
   padding-left: 10px;
 }
 
+/* CSS for dropdown menu in the nav bar */
 .dropdown {
   float: left;
   overflow: hidden;
