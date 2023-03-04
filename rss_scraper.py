@@ -1,5 +1,6 @@
 #!/home/gomezpa/anaconda3/envs/Capstone/bin/python
 
+import re
 from bs4 import BeautifulSoup
 import random
 import requests
@@ -38,22 +39,30 @@ urls = [
 ]
 
 def inputDB(title, description, link, article):
-    sql = "INSERT INTO news_article (article_text) VALUES (%s)"
-    val = (article,)
-    mycursor.execute(sql, val)
-    mycursor.execute("SELECT article_id FROM news_article ORDER BY article_id DESC LIMIT 1;")
-    articleID = mycursor.fetchall()
+    mycursor.execute('SELECT * FROM news_article WHERE article_text=%s',(article,))
+    result = mycursor.fetchone()
+    if result:
+        articleID = result[0]
+    else:
+        sql = "INSERT INTO news_article (article_text) VALUES (%s)"
+        val = (article,)
+        mycursor.execute(sql, val)
+        articleID = mycursor.lastrowid
+
+    mycursor.fetchall()
     
     mycursor.execute("SELECT * FROM news_items WHERE news_title=%s OR news_link=%s", (title, link))
     result = mycursor.fetchall()
     if not result:
         sql = "INSERT INTO news_items (news_title, news_description, news_link, article_id) VALUES (%s, %s, %s, %s)"
-        val = (title, description, link, articleID[0][0])
+        val = (title, description, link, articleID)
         mycursor.execute(sql, val)
     else:
         sql = "UPDATE news_items SET news_description=%s WHERE news_title=%s OR news_link=%s"
         val = (description, title, link)
         mycursor.execute(sql, val) 
+
+    mycursor.fetchall();
 
 def get_urls(url):
     for url in urls:
