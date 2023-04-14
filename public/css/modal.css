@@ -9,7 +9,7 @@ img.avatar {
   border-radius: 50%;
 }
 
-input[type=text], input[type=password] {
+input[type=email], input[type=text], input[type=password] {
   width: 100%;
   padding: 12 20px;
   margin: 8px 0 22px 0;
@@ -18,7 +18,7 @@ input[type=text], input[type=password] {
   background: #f1f1f1;
 }
 
-.signup-input[type=text]:focus, [type=password]:focus {
+.signup-input[type=text]:focus, [type=password]:focus, [type=email]:focus{
   background-color: #ddd;
   outline: none;
 }

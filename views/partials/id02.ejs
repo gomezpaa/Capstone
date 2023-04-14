@@ -1,16 +1,16 @@
 <span onclick="document.getElementById('id02').style.display='none'" class="login-close animate" title="Close Menu">&times;</span>
-<form class="modal-content animate">
+<form class="modal-content animate" action="/login" method="post">
   
   <div class="imgcontainer">
     <img src="/images/profile.png" alt="Avatar" class="avatar">    
   </div>
 
   <div class="login-container">
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <label for="email"><b>Username</b></label>
+    <input type="text" placeholder="Enter username" name="username" required>
 
     <label for="passwd"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="passwd" required>
+    <input type="password" placeholder="Enter password" name="password" required>
 
     <button type="submit" class="loginbtn">Login</button>
 
