@@ -1,13 +1,13 @@
 const express = require('express');
 const path = require('path');
 const db = require('./db')
-const loginDB = require('./login');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const mysql = require('mysql');
 const session = require('express-session');
 const {Console} = require('console');
 const {request} = require('http');
+const {strict} = require('assert');
 
 require('dotenv').config()
 
@@ -37,56 +37,78 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUnintialized: true
+  saveUnintialized: true,
+  cookie: {
+    maxAge: 15 * 60 * 1000,
+    secure: false,
+    httpOnly: true,
+    sameSite: 'strict'
+  },
+  rolling: true
 }));
 
 app.get('/', function(req, res){
   console.log("Home Page")
-  res.render('home')
+  res.render('home', { username: req.session.username });
 });
 
 app.get('/about', function(req, res){
   console.log("About Page")
-  res.render('about');
+  res.render('about', { username: req.session.username });
 });
 
 app.get('/nyt', function(req, res){
   console.log("NYT")
   db.getData(function(data){  
     db.getFullData(function(fullArticle){
-      res.render('nyt', {news:data, fullArticle: fullArticle});
+      res.render('nyt', {username: req.session.username, news: data, fullArticle: fullArticle});
     });
   });
+});
+
+app.get('/logout', function(req, res) {
+  if (req.session) {
+    req.session.destroy(err => {
+      if (err) {
+        res.status(400).send('Unable to logout!')
+      } else {
+        res.redirect('/');
+      }
+    })
+  }
 });
 
 app.post('/register', function(req, res) {
   var username = req.body.username;
   var email = req.body.email;
-  if (req.body.password == req.body.passwordRepeat) {
-    var hash = bcrypt.hashSync(req.body.password, saltRounds);
-  } else {
-    console.log("Passwords do not match!")
-  }
-  console.log(username, email, hash);
-
   var sqlCheck = "SELECT * FROM users WHERE username = ? OR email = ?";
   var sqlInsert = "INSERT INTO users (username, email, password) VALUES (?,?,?)";
-  var valueCheck = [username, email];
-  var valueInsert = [username, email, hash];
 
-  userRegister.query(sqlCheck, valueCheck, function(err, result){
-    if (err) throw err;
-    if (result.length > 0) {
-      console.log("Username or email already exists!");
-      res.send('<script>alert("Username or email already exists! Please choose a different username or email."); window.history.back();</script>');
-    } else {
-      userRegister.query(sqlInsert, valueInsert, function (err, result){
+  if (req.body.password == req.body.passwordRepeat) {
+    var valueCheck = [username, email];
+    var hash = bcrypt.hashSync(req.body.password, saltRounds);
+    var valueInsert = [username, email, hash];
+
+    userRegister.query(sqlCheck, valueCheck, function(err, result){
+      if (err) throw err;
+      if (result.length > 0) {
+        console.log("Username or email already exists!");
+        res.send('<script>alert("Username or email already exists! Please choose a different username or email."); window.history.back();</script>');
+      } else {
+        userRegister.query(sqlInsert, valueInsert, function (err, result){
         if (err) throw err;
         console.log("User registered successfully!");
         res.redirect('/');
       });
     }
-  });
+    });
+  } else {
+    console.log("Passwords do not match!")
+    res.send('<script>alert("Passwords do not match! Please try again."); window.history.back();</script>');
+
+  }
+  console.log(username, email, hash);
+
 });
 
 app.post('/login', function(req, res) {
