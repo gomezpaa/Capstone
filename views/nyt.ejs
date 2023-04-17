@@ -27,8 +27,21 @@
           <a href="#">CNN</a>
         </div>    
       </div>
-      <a onclick="document.getElementById('id01').style.display='block'" class="signup-btn"><span>Sign Up</span></a>
-      <a onclick="document.getElementById('id02').style.display='block'" class="login-btn"><span>Login</span></a> 
+
+      <% if (username) { %>
+        <div class="user-dropdown">
+          <button class="username">Welcome <%= username %> 
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="user-content">
+            <a href="/logout">Logout</a>
+          </div>
+          
+        </div>
+      <% } else { %>
+        <a onclick="document.getElementById('id01').style.display='block'" class="signup-btn"><span>Sign Up</span></a>
+        <a onclick="document.getElementById('id02').style.display='block'" class="login-btn"><span>Login</span></a>         
+      <% } %>
     </div>
 
     <div id="id01" class="modal">
