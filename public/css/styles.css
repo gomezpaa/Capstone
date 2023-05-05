@@ -1,0 +1,194 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+#sort {
+    float: right;
+}
+
+#homeNoLogin {
+    font-size: 30px;
+    text-align: center;
+}
+
+/* CSS for navigation bar */
+.nav-bar {
+  background-color: #42455a; 
+  overflow: hidden;
+}    
+
+.nav-bar a{
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  padding-top: 20px;
+}
+
+.nav-bar .signup-btn {
+  float: right;
+  background-color: red;
+}
+
+.nav-bar .login-btn {
+  float: right;
+  background-color: black;
+}
+
+.nav-bar a:hover, .dropdown:hover .dropbtn {
+  background-color: #fff;
+  color: #42455a;
+  height: auto;
+}
+
+.nav-bar a.active {
+  background-color: 6d7396;
+}
+
+.nav-bar img{
+  width: 40px;
+  margin-top: -25px;
+  margin-right: 30px;
+  padding-top: 20px;
+  padding-left: 10px;
+}
+
+/* CSS for dropdown menu for users */
+.user-dropdown {
+  float: right;
+  overflow: hidden;
+}
+
+.user-dropdown .username {
+  font-size: 20px;
+  border: none;
+  outline: none;
+  text-align: center;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  padding-top: 20px;
+  cursor: pointer;
+}
+
+
+.user-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 205px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0,0.2);
+  z-index: 1;
+}
+
+.user-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.user-content a:hover {
+  background-color: #ddd;
+}
+
+.user-dropdown:hover .user-content {
+  display: block;
+}
+
+/* CSS for dropdown menu in the nav bar */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  padding-top: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;  
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0,0.2);
+  z-index: 1;
+}
+ 
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* CSS for navigation bar (for smaller screens) */
+@media screen and (max-width: 500px) {
+  .nav-bar a {
+    float: none;
+    display: block;
+    text-align: center;
+    border-bottom: 0.5px solid black;
+  }
+  
+  .nav-bar .dropdown {
+    float: none;
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+ 
+  .nav-bar .news-dropdown-content{
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-bar .login-btn {
+    float: none;
+    display: block;
+    text-align: center;
+  }
+
+  .nav-bar .signup-btn {
+    float: none;
+    display: block;
+    text-align: center;
+  }
+}
+
+/* CSS for about page */
+.proposal,
+.report-log {
+  padding: 20px 40px;
+}
+
+.proposal-text,
+.report-log-text {
+  font-size: 20px;
+}

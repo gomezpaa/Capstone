@@ -1,0 +1,56 @@
+<html>
+    <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>About</title>
+	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+	<link href="/css/modal.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+	<div class="nav-bar">
+	    <a href="#"><img src="/images/pngegg.png"></a>
+	    <a href="/">Home</a> 
+	    <a href="/about" class="active">About</a>
+	    <div class="dropdown">
+		<button class="dropbtn">News
+		    <i class="fa fa-caret-down"></i>
+		</button>
+		<div class="dropdown-content news-dropdown-content">
+		    <a href="/nyt">NYT</a>
+		    <a href="/fox">Fox News</a>
+		    <a href="/cnn">CNN</a>
+		</div>
+	    </div>
+	    <% if (username) { %>
+		<div class="user-dropdown">
+		    <button class="username">Welcome <%= username %> 
+			<i class="fa fa-caret-down"></i>
+		    </button>
+		    <div class="user-content">
+			<a href="/favoritePage">Your favorites</a>
+			<a href="/logout">Logout</a>
+		    </div>
+          
+		</div>
+	    <% } else { %>
+		<a onclick="document.getElementById('id01').style.display='block'" class="signup-btn"><span>Sign Up</span></a>
+		<a onclick="document.getElementById('id02').style.display='block'" class="login-btn"><span>Login</span></a>
+	    <% } %>
+	</div>
+
+	<div id="id01" class="modal">
+	    <%- include("./partials/id01.ejs") %>
+	</div>
+
+	<div id="id02" class="modal">
+	    <%- include("./partials/id02.ejs") %>
+	</div>
+
+	<h1> About Page </h1>
+	<br>
+	<h2> Capstone Proposal </h2>
+	<%- include("./partials/proposal.ejs") %>
+        <h2> Report Log </h2>
+	<%- include("./partials/log.ejs") %>
+    </body>
+</html>

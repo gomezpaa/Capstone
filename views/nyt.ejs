@@ -1,0 +1,125 @@
+<html>
+    <head>
+	<title>NYT</title>
+	<link href="/css/articleModal.css" rel="stylesheet" type="text/css">
+	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+	<link href="/css/modal.css" rel="stylesheet" type="text/css">
+	<link href="/css/container.css" rel="stylesheet" type="text/css">
+	<link href="/css/tabs.css" rel="stylesheet" type="text/css">
+	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<script src="/scripts/tabs.js"></script>
+ 	<script src="/scripts/toggleSort.js"></script>
+   </head>
+    <body>
+	<div class="nav-bar">
+	    <a href="/"><img src="/images/pngegg.png"</a>
+	    <a href="/">Home</a>
+	    <a href="/about">About</a>
+	    <div class="dropdown">
+		<button class="dropbtn">News
+		<i class="fa fa-caret-down"></i>
+		</button>
+      
+		<div class="dropdown-content news-dropdown-content">
+		    <a href="/nyt">NYT</a>
+		    <a href="/fox">Fox News</a>
+		    <a href="/cnn">CNN</a>
+		</div>    
+	    </div>
+	    <% if (username) { %>
+		<div class="user-dropdown">
+		    <button class="username">Welcome <%= username %> 
+			<i class="fa fa-caret-down"></i>
+		    </button>
+		    <div class="user-content">
+			<a href="/favoritePage">Your favorites</a>
+			<a href="/logout">Logout</a>
+		    </div>
+          
+		</div>
+	    <% } else { %>
+		<a onclick="document.getElementById('id01').style.display='block'" class="signup-btn"><span>Sign Up</span></a>
+		<a onclick="document.getElementById('id02').style.display='block'" class="login-btn"><span>Login</span></a>
+	    <% } %>
+	</div>
+
+	<div id="id01" class="modal">
+	    <%- include("./partials/id01.ejs") %>
+	</div>     
+
+	<div id="id02" class="modal">
+	    <%- include("./partials/id02.ejs") %>
+	</div>
+ 
+	<div class="tab">
+	    <button class="tablinks" onclick="openVersion(event, 'version1')">Scraper V1</button>
+	    <button class="tablinks" onclick="openVersion(event, 'version2')">Scraper V2</button>
+	</div>  
+
+<!-- This div holds the info the NYT Scraper V1 -->
+	<div id="version1" class="tabcontent">
+	    <h2>NYT Scraper V1</h2>
+	    <p>This version will scrape the <a href="https://rss.nytimes.com/services/xml/rss/nyt/US.xml">NYT US RSS feed</a> every two hours. This version will display the title, description, when it was published, and a link to the article. <a class="btn" onclick="toggleSort()" id="sort">Sort by date</a></p>
+	    <p>However, this version requires a subscription to the NYT to see the full article.</p>
+	    <div class="container">
+		<% news.forEach(function(item) { %>
+		    <div class="card">
+			<div class="card-body">
+			    <h4 class="card-title"><%= item.title %></h4>
+			    <hr>
+			    <p class="card-text"><%= item.description %>
+			    <hr>
+			    <p class="card-text">Published on: <%= item.pubDate %></p>
+			    <hr>
+			    
+			    <% if (username) { %>
+				<a href="<%= item.link %>" class="btn" style="float: left">Read More</a>
+				<form action="/favorite" method="POST">
+				    <input type="hidden" name="article_id" value="<%= item.id %>">
+				    <button type="submit" id="favorite" class="btn" style="float: right">Add to favorite</button>
+				</form>
+			    <% } else { %>
+				<a href="<%= item.link %>" class="btn" style="float: left">Read More</a>
+				<button type="submit" id="favorite" class="btn" style="float: right">Login to favorite</button>
+			    <% } %>
+			</div>
+		    </div>
+		<% }); %>
+	    </div>
+	</div>
+	
+	<div id="version2" class="tabcontent">
+	    <h2>NYT Scraper V2</h2>
+	    <p>This version is scraping the following NYT RSS feeds:</p>
+	    <p><a href="https://rss.nytimes.com/services/xml/rss/nyt/US.xml">NYT US</a></p>
+	    <p><a href="https://rss.nytimes.com/services/xml/rss/nyt/World.xml">NYT World</a></p>
+	    <p><a href="https://rss.nytimes.com/services/xml/rss/nyt/NYRegion.xml">NYT NYRegion</a></p>
+	    <p>Like version 1, version 2 is scraping the title and description. However, this version is scraping the full article. This version does not require a NYT subscription.</p>
+	    <p>Just click "Show Full Article" and enjoy!</p>
+	    <div class="container">
+		<% fullArticle.forEach(function(item, index) { %>
+		    <div class="card">
+			<div class="card-body">
+			    <h4 class="card-title"><%= item.news_title %></h4>
+			    <hr>
+			    <p class="card-text"><%= item.news_description %></p>
+			    <hr>
+			    <button id="articleBtn" class="btn" onclick="document.getElementById('articleModal<%= index %>').style.display='block'">Show Full Article</button>
+			</div>
+		    </div>
+		    <div id="articleModal<%= index %>" class="art-modal">
+			<div class="art-modal-content">
+			    <span class="close" onclick="document.getElementById('articleModal<%= index %>').style.display='none'">&times;</span>
+			    <div class="art-modal-text">
+				<h1><%= item.news_title %></h1>
+				<hr>
+				<p><%= item.article_text %></p>
+			    </div>
+			</div>
+		    </div>
+		<% }); %>
+	    </div>
+	</div>
+    </body>
+</html>
